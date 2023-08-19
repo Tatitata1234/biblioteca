@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -30,16 +31,16 @@ public class BookService {
         return BookMapper.toResponse(book.get());
     }
 
-    public BookResponse findByNome(String nome) {
-        Optional<Book> book = bookRepository.findByNome(nome);
-        if (book.isEmpty()){
+    public BookResponse findByName(String nome) {
+        Book book = bookRepository.findByName(nome);
+        if (Objects.isNull(book)){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        return BookMapper.toResponse(book.get());
+        return BookMapper.toResponse(book);
     }
 
-    public List<BookResponse> findByNomeLike(String nome) {
-        List<Book> books = bookRepository.findAllByNomeContainingIgnoreCase(nome);
+    public List<BookResponse> findByNameLike(String nome) {
+        List<Book> books = bookRepository.findAllByNameContainingIgnoreCase(nome);
         if (books.isEmpty()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

@@ -10,7 +10,7 @@ public class BookMapper {
     public static BookResponse toResponse(Book entity) {
         return BookResponse.builder()
                 .id(entity.getId())
-                .nome(entity.getNome())
+                .name(entity.getName())
                 .build();
     }
 }
