@@ -28,12 +28,12 @@ public class BookController {
     }
 
     @GetMapping("/titulo/{nome}")
-    public BookResponse findByNome(@PathVariable(value = "nome") String nome){
-        return bookService.findByNome(nome);
+    public BookResponse findByName(@PathVariable(value = "nome") String nome){
+        return bookService.findByName(nome);
     }
 
     @GetMapping("/titulos/{nome}")
-    public List<BookResponse> findByNomeLike(@PathVariable(value = "nome") String nome){
-        return bookService.findByNomeLike(nome);
+    public List<BookResponse> findByNameLike(@PathVariable(value = "nome") String nome){
+        return bookService.findByNameLike(nome);
     }
 }
