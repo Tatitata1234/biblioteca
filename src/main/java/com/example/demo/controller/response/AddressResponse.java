@@ -7,10 +7,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BookResponse {
+public class AddressResponse {
     private Long id;
-    private String name;
-    private int pages;
-    private boolean rented;
 
+    private String description;
+
+    private int number;
 }

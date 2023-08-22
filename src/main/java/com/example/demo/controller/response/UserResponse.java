@@ -1,5 +1,6 @@
 package com.example.demo.controller.response;
 
+import com.example.demo.domain.Address;
 import lombok.*;
 
 @Getter
@@ -7,10 +8,11 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BookResponse {
+public class UserResponse {
     private Long id;
     private String name;
-    private int pages;
-    private boolean rented;
 
+    private int age;
+
+    private Address address;
 }

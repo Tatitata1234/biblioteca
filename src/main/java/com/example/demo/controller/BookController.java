@@ -27,13 +27,18 @@ public class BookController {
         return bookService.findById(bookId);
     }
 
-    @GetMapping("/titulo/{nome}")
-    public BookResponse findByName(@PathVariable(value = "nome") String nome){
-        return bookService.findByName(nome);
+    @GetMapping("/title/{name}")
+    public BookResponse findByName(@PathVariable(value = "name") String name){
+        return bookService.findByName(name);
     }
 
-    @GetMapping("/titulos/{nome}")
-    public List<BookResponse> findByNameLike(@PathVariable(value = "nome") String nome){
-        return bookService.findByNameLike(nome);
+    @GetMapping("/title/{name}")
+    public List<BookResponse> findByNameLike(@PathVariable(value = "name") String name){
+        return bookService.findByNameLike(name);
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<BookResponse> findAllRentedByUser(@PathVariable(value = "userId") Long userId){
+        return bookService.findAllRentedByUser(userId);
     }
 }

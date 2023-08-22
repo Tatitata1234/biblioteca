@@ -1,11 +1,12 @@
 package com.example.demo.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static jakarta.persistence.FetchType.*;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -24,4 +25,12 @@ public class User {
 
     @ManyToOne
     private Address address;
+
+    private boolean active;
+
+    @ManyToMany
+    private List<Book> livrosAlugados = new ArrayList<>();
+
+    @ManyToMany(fetch = LAZY)
+    private List<Book> livrosLidos;
 }

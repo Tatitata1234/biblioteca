@@ -24,7 +24,7 @@ public class BookService {
     }
 
     public BookResponse findById(Long bookId) {
-        Optional<Book> book = bookRepository.findById(bookId);
+        Optional<Book> book = bookRepository.findByIdAndActiveIsTrue(bookId);
         if (book.isEmpty()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
@@ -32,7 +32,7 @@ public class BookService {
     }
 
     public BookResponse findByName(String nome) {
-        Book book = bookRepository.findByName(nome);
+        Book book = bookRepository.findByNameAndActiveIsTrue(nome);
         if (Objects.isNull(book)){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
@@ -40,10 +40,14 @@ public class BookService {
     }
 
     public List<BookResponse> findByNameLike(String nome) {
-        List<Book> books = bookRepository.findAllByNameContainingIgnoreCase(nome);
+        List<Book> books = bookRepository.findAllByNameContainingIgnoreCaseAndActiveIsTrue(nome);
         if (books.isEmpty()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         return books.stream().map(BookMapper::toResponse).toList();
+    }
+
+    public List<BookResponse> findAllRentedByUser(Long userId) {
+        return bookRepository.findAllByUser_Livros_AlugadosAndUserIdAndActiveIsTrue(userId).stream().map(BookMapper::toResponse).toList();
     }
 }

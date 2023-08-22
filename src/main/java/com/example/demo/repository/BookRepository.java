@@ -10,9 +10,12 @@ import java.util.Optional;
 @Repository
 public interface BookRepository extends JpaRepository<Book,Long> {
 
-    Book findByName(String name);
+    Book findByNameAndActiveIsTrue(String name);
 
-    Optional<Book> findById(Long bookId);
+    Optional<Book> findByIdAndActiveIsTrue(Long bookId);
 
-    List<Book> findAllByNameContainingIgnoreCase(String name);
+    List<Book> findAllByNameContainingIgnoreCaseAndActiveIsTrue(String name);
+
+    //select * from user_livros_alugados where user_id = 1;
+    List<Book> findAllByUser_Livros_AlugadosAndUserIdAndActiveIsTrue(Long userId);
 }

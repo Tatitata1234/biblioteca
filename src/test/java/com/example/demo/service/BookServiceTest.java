@@ -48,7 +48,7 @@ class BookServiceTest {
         Long id = GeneratedNumbers.getLong();
         Book book = BookFactory.getNormalBook(id);
 
-        when(bookRepository.findById(id)).thenReturn(Optional.ofNullable(book));
+        when(bookRepository.findByIdAndActiveIsTrue(id)).thenReturn(Optional.ofNullable(book));
 
         BookResponse response = tested.findById(id);
 
@@ -60,7 +60,7 @@ class BookServiceTest {
     void shouldThrowExceptionWhenIdDoesntExist(){
         Long id = GeneratedNumbers.getLong();
 
-        when(bookRepository.findById(id)).thenReturn(Optional.empty());
+        when(bookRepository.findByIdAndActiveIsTrue(id)).thenReturn(Optional.empty());
 
         assertThrows(ResponseStatusException.class, () ->tested.findById(id));
     }
@@ -71,7 +71,7 @@ class BookServiceTest {
         Book book = BookFactory.getNormalBook(id);
         String name = book.getName();
 
-        when(bookRepository.findByName(name)).thenReturn(book);
+        when(bookRepository.findByNameAndActiveIsTrue(name)).thenReturn(book);
 
         BookResponse response = tested.findByName(name);
 
@@ -83,7 +83,7 @@ class BookServiceTest {
     void shouldThrowExceptionWhenNameDoesntExist(){
         String name = "name not exists";
 
-        when(bookRepository.findByName(name)).thenReturn(null);
+        when(bookRepository.findByNameAndActiveIsTrue(name)).thenReturn(null);
 
         assertThrows(ResponseStatusException.class, () ->tested.findByName(name));
     }
@@ -96,7 +96,7 @@ class BookServiceTest {
         String subName = books.get(0).getName().substring(0,1);
 
 
-        when(bookRepository.findAllByNameContainingIgnoreCase(subName)).thenReturn(books);
+        when(bookRepository.findAllByNameContainingIgnoreCaseAndActiveIsTrue(subName)).thenReturn(books);
 
         List<BookResponse> responses = tested.findByNameLike(subName);
 
@@ -111,7 +111,7 @@ class BookServiceTest {
         String subName = "subname not exists";
 
 
-        when(bookRepository.findAllByNameContainingIgnoreCase(subName)).thenReturn(books);
+        when(bookRepository.findAllByNameContainingIgnoreCaseAndActiveIsTrue(subName)).thenReturn(books);
 
         assertThrows(ResponseStatusException.class, () ->tested.findByNameLike(subName));
     }

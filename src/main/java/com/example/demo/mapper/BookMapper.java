@@ -11,6 +11,8 @@ public class BookMapper {
         return BookResponse.builder()
                 .id(entity.getId())
                 .name(entity.getName())
+                .pages(entity.getPages())
+                .rented(entity.isRented())
                 .build();
     }
 }
